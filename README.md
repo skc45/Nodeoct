@@ -30,6 +30,24 @@ npm run build
 npm run preview
 ```
 
+## Desktop app (Windows .exe)
+
+Build a portable Windows executable:
+
+```bash
+npm install
+npm run dist
+```
+
+The `.exe` is written to `release/Nodeoct-0.1.0-portable.exe`. Double-click to run — no install required.
+
+For a full installer instead:
+
+```bash
+npm run dist:installer
+```
+
+Download the latest built `.exe` from [GitHub Releases](https://github.com/skc45/Nodeoct/releases).
 ## How it works
 
 Each note has `(x, y, z)` coordinates from **0 to 2**, mapping to positions inside a wireframe cube. The cube is split into **8 regions**:
