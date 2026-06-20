@@ -3,7 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Html, Line, Text } from '@react-three/drei'
 import type { Group, Mesh } from 'three'
 import type { Note } from '../types/note'
-import { AXIS_LABELS } from '../types/note'
+import type { AxisLabels } from '../types/axis'
 import {
   CUBE_CENTER,
   CUBE_SIZE,
@@ -13,10 +13,12 @@ import {
   type RegionId,
   type RegionLabels,
 } from '../types/region'
+import { NotePreview } from './NotePreview'
 
 interface CubeSceneProps {
   notes: Note[]
   selectedId: string | null
+  axisLabels: AxisLabels
   regionLabels: RegionLabels
   rotationSpeed: number
   onSelect: (id: string) => void
@@ -73,11 +75,16 @@ function NoteMarker({
           distanceFactor={8}
           style={{
             pointerEvents: 'none',
-            whiteSpace: 'nowrap',
-            transform: 'translateY(-28px)',
+            transform: 'translateY(-12px)',
+            minWidth: 160,
+            maxWidth: 260,
           }}
         >
-          <div className="marker-label">{note.title || 'Untitled'}</div>
+          <NotePreview
+            title={note.title}
+            body={note.body}
+            className="marker-note-preview"
+          />
         </Html>
       )}
     </group>
@@ -154,7 +161,7 @@ function SubCube({ id, label }: { id: RegionId; label: string }) {
   )
 }
 
-function AxisLines() {
+function AxisLines({ axisLabels }: { axisLabels: AxisLabels }) {
   const len = CUBE_SIZE + 0.2
 
   const dividerLines: [number, number, number][][] = [
@@ -179,13 +186,13 @@ function AxisLines() {
       <Line points={[[0, 0, 0], [0, 0, len]]} color="#74c0fc" lineWidth={1.5} />
 
       <Text position={[len + 0.12, 0, 0]} fontSize={0.11} color="#ff6b6b" anchorX="left">
-        {AXIS_LABELS.x} (0–2)
+        {axisLabels.x} (0–2)
       </Text>
       <Text position={[0, len + 0.12, 0]} fontSize={0.11} color="#69db7c" anchorX="center">
-        {AXIS_LABELS.y} (0–2)
+        {axisLabels.y} (0–2)
       </Text>
       <Text position={[0, 0, len + 0.12]} fontSize={0.11} color="#74c0fc" anchorX="center">
-        {AXIS_LABELS.z} (0–2)
+        {axisLabels.z} (0–2)
       </Text>
 
       {dividerLines.map((points, i) => (
@@ -205,6 +212,7 @@ function AxisLines() {
 function RotatingCube({
   notes,
   selectedId,
+  axisLabels,
   regionLabels,
   rotationSpeed,
   onSelect,
@@ -242,7 +250,7 @@ function RotatingCube({
         {REGION_IDS.map((id) => (
           <SubCube key={id} id={id} label={regionLabels[id]} />
         ))}
-        <AxisLines />
+        <AxisLines axisLabels={axisLabels} />
         {notes.map((note) => (
           <NoteMarker
             key={note.id}
@@ -259,6 +267,7 @@ function RotatingCube({
 export function CubeScene({
   notes,
   selectedId,
+  axisLabels,
   regionLabels,
   rotationSpeed,
   onSelect,
@@ -277,6 +286,7 @@ export function CubeScene({
       <RotatingCube
         notes={notes}
         selectedId={selectedId}
+        axisLabels={axisLabels}
         regionLabels={regionLabels}
         rotationSpeed={rotationSpeed}
         onSelect={onSelect}

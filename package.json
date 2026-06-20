@@ -1,7 +1,7 @@
 {
   "name": "nodeoct",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Notes app plotted on a 3-axis cube with 8 labelable sub-regions",
   "author": "skc45",
   "main": "electron/main.cjs",

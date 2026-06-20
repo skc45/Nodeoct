@@ -1,16 +1,19 @@
 # Nodeoct
 
-A notes app that plots each note as a point inside a **3-axis cube** (0–2 on each axis). The cube is divided into **8 labelable sub-cubes** at the midpoint (1) on each axis. Position notes along three dimensions — Focus (X), Energy (Y), and Depth (Z) — and see them rendered in interactive 3D space.
+A notes app that plots each note as a point inside a **3-axis cube** (0–2 on each axis). The cube is divided into **8 labelable sub-cubes** at the midpoint (1) on each axis. Position notes along three dimensions — Urgency (X), Priority (Y), and Relevance (Z) — and see them rendered in interactive 3D space.
 
 ## Features
 
 - Create, edit, and delete notes
 - Three axis sliders per note (0 to 2) to position it in the cube
 - 8 sub-cubes split at x=1, y=1, z=1 — each with a custom editable label
-- Interactive 3D visualization with orbit controls
-- Click spheres in the cube to select notes
+- Editable axis names (Urgency, Priority, Relevance by default)
+- Collapsible label editors
+- Interactive 3D visualization with orbit controls and adjustable rotation speed
+- Full note preview on 3D sphere hover
 - Notes persist in localStorage
 - Color-coded note markers
+- Windows portable `.exe` available on Releases
 
 ## Getting started
 
@@ -39,7 +42,7 @@ npm install
 npm run dist
 ```
 
-The `.exe` is written to `release/Nodeoct-0.1.0-portable.exe`. Double-click to run — no install required.
+The `.exe` is written to `release/Nodeoct-0.2.0-portable.exe`. Double-click to run — no install required.
 
 For a full installer instead:
 
@@ -48,6 +51,7 @@ npm run dist:installer
 ```
 
 Download the latest built `.exe` from [GitHub Releases](https://github.com/skc45/Nodeoct/releases).
+
 ## How it works
 
 Each note has `(x, y, z)` coordinates from **0 to 2**, mapping to positions inside a wireframe cube. The cube is split into **8 regions**:
@@ -65,10 +69,10 @@ Each note has `(x, y, z)` coordinates from **0 to 2**, mapping to positions insi
 
 Edit labels in the **Sub-cube labels** panel. Notes saved with the old -1…1 range are migrated automatically on load.
 
-| Axis | Label  | Range |
-|------|--------|-------|
-| X    | Focus  | 0 ↔ 2 |
-| Y    | Energy | 0 ↔ 2 |
-| Z    | Depth  | 0 ↔ 2 |
+| Axis | Label     | Range |
+|------|-----------|-------|
+| X    | Urgency   | 0 ↔ 2 |
+| Y    | Priority  | 0 ↔ 2 |
+| Z    | Relevance | 0 ↔ 2 |
 
 Adjust the sliders while editing a note to move its sphere in real time.

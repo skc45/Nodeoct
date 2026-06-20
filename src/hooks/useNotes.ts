@@ -10,7 +10,7 @@ function loadNotes(): Note[] {
       return [
         createNote({
           title: 'Welcome',
-          body: 'Drag the sliders (0–2 on each axis) to position this note in one of the 8 sub-cubes. Edit sub-cube labels in the panel below.',
+          body: 'Use the axis sliders to position this note inside one of the 8 sub-cubes. Edit axis and sub-cube labels in the panels above.',
           x: 1.3,
           y: 0.4,
           z: 1.6,

@@ -9,7 +9,13 @@ interface NoteListProps {
   onAdd: () => void
 }
 
-export function NoteList({ notes, selectedId, regionLabels, onSelect, onAdd }: NoteListProps) {
+export function NoteList({
+  notes,
+  selectedId,
+  regionLabels,
+  onSelect,
+  onAdd,
+}: NoteListProps) {
   return (
     <div className="note-list">
       <div className="note-list-header">

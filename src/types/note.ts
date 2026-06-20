@@ -12,13 +12,6 @@ export interface Note {
   createdAt: number
   updatedAt: number
 }
-
-export const AXIS_LABELS = {
-  x: 'Focus',
-  y: 'Energy',
-  z: 'Depth',
-} as const
-
 export const NOTE_COLORS = [
   '#7c9cff',
   '#ff7c9c',
@@ -32,8 +25,7 @@ export const NOTE_COLORS = [
 
 export function createNote(partial?: Partial<Note>): Note {
   const now = Date.now()
-  return {
-    id: crypto.randomUUID(),
+  return {    id: crypto.randomUUID(),
     title: '',
     body: '',
     x: 1,

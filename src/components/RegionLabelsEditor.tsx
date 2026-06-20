@@ -5,6 +5,7 @@ import {
   type RegionId,
   type RegionLabels,
 } from '../types/region'
+import { CollapsiblePanel } from './CollapsiblePanel'
 
 interface RegionLabelsEditorProps {
   labels: RegionLabels
@@ -18,36 +19,41 @@ export function RegionLabelsEditor({
   onReset,
 }: RegionLabelsEditorProps) {
   return (
-    <div className="region-labels">
-      <div className="region-labels-header">
-        <h2>Sub-cube labels</h2>
-        <button type="button" className="btn-reset" onClick={onReset}>
+    <CollapsiblePanel
+      title="Sub-cube labels"
+      hint="The cube is split into 8 regions (0–1 and 1–2 on each axis). Name each cell below — labels appear inside the 3D view."
+      headerActions={
+        <button
+          type="button"
+          className="btn-reset"
+          onClick={(e) => {
+            e.stopPropagation()
+            onReset()
+          }}
+        >
           Reset
         </button>
-      </div>
-      <p className="region-labels-hint">
-        The cube is split into 8 regions (0–1 and 1–2 on each axis). Name each
-        cell below — labels appear inside the 3D view.
-      </p>
-      <ul className="region-label-list">
+      }
+    >
+      <ul className="label-input-list">
         {REGION_IDS.map((id) => (
           <li key={id}>
             <span
               className="region-swatch"
               style={{ background: REGION_COLORS[id] }}
             />
-            <div className="region-label-fields">
+            <div className="label-input-fields">
               <input
-                className="region-label-input"
+                className="label-input"
                 value={labels[id]}
                 onChange={(e) => onUpdate(id, e.target.value)}
                 placeholder={`Region ${id}`}
               />
-              <span className="region-range">{getRegionRangeLabel(id)}</span>
+              <span className="label-input-meta">{getRegionRangeLabel(id)}</span>
             </div>
           </li>
         ))}
       </ul>
-    </div>
+    </CollapsiblePanel>
   )
 }
